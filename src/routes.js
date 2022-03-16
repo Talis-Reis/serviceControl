@@ -1,8 +1,10 @@
 const express = require('express');
 const router = express.Router();
 
-const taskController = require('./controller/TaskController');
+const userController = require('./controller/UserController');
 
-router.get('/users', taskController.buscarTodos);
+router.get('/users', userController.findAll);
+router.get('/user/:ctrl_user', userController.findById);
+router.post('/create/user', userController.createUser);
 
 module.exports = router;

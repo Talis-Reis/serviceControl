@@ -10,8 +10,4 @@ app.use(cors());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use('/api', routes);
 
-app.get("/", (req, res) => {
-    res.json({mesage: 'OK'})
-});
-
 app.listen(env.PORT, ()=> {console.log(`Servidor conectado na porta ${env.PORT}`)});
