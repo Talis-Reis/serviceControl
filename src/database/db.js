@@ -1,24 +1,26 @@
-const database = () =>{
-
+const mysql = require('mysql');
 require('dotenv').config();
 const env = process.env;
-const { Sequelize } = require('sequelize');
-const sequelize = new Sequelize(env.DB_SCHEMA,env.DB_USER,env.DB_PASSWORD,{
-    host: env.DB_HOST,
-    dialect: env.DB_TYPE_DATABASE,
-    port: env.DB_PORT
-});
 
-sequelize.authenticate().then(
-    ()=>{
-        console.log('Conexão com o banco de dados. STATUS: SUCESSO!');
+const connection = mysql.createConnection({
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_SCHEMA,
+    port: process.env.DB_PORT
+})
+
+// connection.connect(()=>{
+//     console.log('Conexão com o banco de dados. STATUS: SUCESSO!');
+// })
+
+connection.connect(function(err){
+    if(err) {
+        // mysqlErrorHandling(connection, err);
+        console.log("\n\t *** Cannot establish a connection with the database. ***");
+    }else {
+        console.log("\n\t *** New connection established with the database. ***")
     }
-).catch((err)=>{
-    console.log('Conexão com o banco de dados. STATUS: FALHA');
-    console.log(`FALHA: ${err}`);
 });
 
-}
-
-
-module.exports = database;
+module.exports = connection;
