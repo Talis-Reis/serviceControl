@@ -13,24 +13,30 @@ module.exports = {
         });
     },
     findById: (ctrl_user) => {
-        return new Promise((sucess, error) => {
+        return new Promise((sucess, erro) => {
             database.query(`SELECT * FROM users WHERE ctrl_user = ${ctrl_user}`, (error, results) => {
                 if (results) {
                     return sucess(results);
                 } else {
-                    return error(error)
+                    return erro(error)
                 }
             })
         })
     },
     createUser: (user) => {
-        console.log(user.password)
-        return new Promise((sucess, error) => {
-            database.query("INSERT INTO users(first_name, last_name, user, password) VALUES(" + '\'' + user.first_name + '\'' + "," + '\'' + user.last_name + '\'' + "," + '\'' + user.user + '\'' + "," + '\'' + user.password + '\'' + ")", (error, results) => {
-                if (results) {
-                    return sucess(results)
+        return new Promise((sucess, erro) => {
+            user.is_admin == true ? user.is_admin = 1 : user.is_admin = 0;
+            database.query(`SELECT * FROM users where email = '${user.email}'`, (error, results) => {
+                if (results.length) {
+                    return sucess(`Email: ${user.email} já cadastrado no banco de dados.`)
                 } else {
-                    return error(error);
+                        database.query("INSERT INTO users(first_name, last_name, user, password, email, is_admin) VALUES(" + '\'' + user.first_name + '\'' + "," + '\'' + user.last_name + '\'' + "," + '\'' + user.user + '\'' + "," + '\'' + user.password + '\'' + "," + '\'' + user.email + '\'' + "," + user.is_admin + ")", (error, results) => {
+                        if (results) {
+                            return sucess(results)
+                        } else {
+                            return erro(error);
+                        }
+                    })
                 }
             })
         })

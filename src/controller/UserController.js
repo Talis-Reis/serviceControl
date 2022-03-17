@@ -9,9 +9,10 @@ module.exports = {
         let users = await userService.findAll();
         for(let item of users){
             json.result.push({
-                ctrl_user: item.ctrl_user,
-                name: item.first_name,
+                first_name: item.first_name,
+                last_name: item.last_name,
                 user: item.user,
+                email: item.email
             });
         }
         res.json(json);
@@ -35,7 +36,9 @@ module.exports = {
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             user: req.body.user,
-            password: req.body.password
+            password: req.body.password,
+            email: req.body.email, 
+            is_admin: req.body.is_admin
         })
 
         json.result.push(createUser);
