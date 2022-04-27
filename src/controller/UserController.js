@@ -54,7 +54,7 @@ module.exports = {
             });
 
             json.result.push(createUser);
-
+            res.status(201)
             res.json(json);
         } catch (e) {
             json.error.push(e);

@@ -37,7 +37,7 @@ module.exports = {
                 `SELECT * FROM users where email = '${user.email}'`,
                 (error, results) => {
                     if (results.length) {
-                        return resolved(
+                        return rejected(
                             `Email: ${user.email} já cadastrado no banco de dados.`
                         );
                     } else {

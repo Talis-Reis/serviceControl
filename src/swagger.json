@@ -1,0 +1,151 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API de cadastro de usuários",
+        "description": "Essa API tem como objetivo a manipulação de usuarios de um sistema de serviços",
+        "contact": {
+            "email": "talisapreis@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [{
+        "url": "http://localhost:8087/api",
+        "description": "API de teste"
+    }],
+    "paths": {
+        "/create/user": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Cadastro de Usuário",
+                "description": "Rota responsável pela criação de um novo usuário.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "first_name": "Talis",
+                                        "last_name": "Reis",
+                                        "user": "talisreis",
+                                        "password": "bcard123",
+                                        "email": "talis@gmail.com",
+                                        "is_admin": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário cadastrado com Sucesso!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Return"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users": {
+            "get": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Cadastro de Usuário",
+                "description": "Rota responsável pela criação de um novo usuário.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users"
+                            },
+                            "examples": {
+                                "user": {
+                                    "value": {
+                                        "first_name": "Talis",
+                                        "last_name": "Reis",
+                                        "user": "talisreis",
+                                        "password": "bcard123",
+                                        "email": "talis@gmail.com",
+                                        "is_admin": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário cadastrado com Sucesso!"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Return"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Users": {
+                "type": "object",
+                "properties": {
+                    "first_name": {
+                        "type": "string"
+                    },
+                    "last_name": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "is_admin": {
+                        "type": "number"
+                    }
+                }
+            },
+            "Return": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "object"
+                    },
+                    "result": {
+                        "type": "object"
+                    }
+                }
+            }
+        }
+    }
+}
