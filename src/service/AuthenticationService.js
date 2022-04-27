@@ -8,7 +8,7 @@ module.exports = {
                 console.log(results)
                 if (results.length != 0) {
                     return sucess(`${credentials.user} Authenticated`);
-                }else{
+                } else {
                     return sucess('Refused')
                 }
             });

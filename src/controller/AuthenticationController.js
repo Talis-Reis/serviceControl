@@ -7,11 +7,11 @@ module.exports = {
             result: []
         }
         let login = await authenticationService.loginAuthentication({
-            user: req.body.user, 
+            user: req.body.user,
             password: req.body.password
         });
-             json.result.push(login);
-        
+        json.result.push(login);
+
         res.json(json);
     }
 }
